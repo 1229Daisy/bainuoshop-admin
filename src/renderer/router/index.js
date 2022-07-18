@@ -85,6 +85,16 @@ export default new Router({
                     component: require('@/components/Freight/FreightPage')
                 },
                 {
+                    path: 'orderdiscount',
+                    name: 'orderdiscount',
+                    component: require('@/components/Order/OrderDiscountPage')
+                },
+                {
+                    path: 'orderdiscount/add',
+                    name: 'orderdiscount_add',
+                    component: require('@/components/Order/OrderDiscountAddPage')
+                },
+                {
                     path: 'except_area',
                     name: 'except_area',
                     component: require('@/components/Freight/ExceptAreaPage')

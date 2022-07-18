@@ -72,10 +72,10 @@
                             </el-table-column>
                         </el-table>
                         <div class="detail-wrap">
-                            <div class="total-price"> 优惠：¥{{infoForm.promotions_price}}</div>
+                            <div class="total-price"> 优惠码：{{infoForm.code}}</div>
                             <div class="total-price"> 合计：¥{{infoForm.actual_price}}（含运费：¥{{infoForm.freight_price}}）</div>
-                            <div class="total-price"> 改价前：¥{{infoForm.change_price}}（含运费：¥{{infoForm.freight_price}}）</div>
-                            <div class="total-price"> {{infoForm.change_price-infoForm.actual_price>0?'优惠金额：'+(infoForm.change_price-infoForm.actual_price).toFixed(2):'涨价金额：'+(infoForm.actual_price- infoForm.change_price).toFixed(2)}}</div>
+                            <div class="total-price"> 改价前：¥{{infoForm.order_price}}（含运费：¥{{infoForm.freight_price}}）</div>
+                            <div class="total-price"> {{infoForm.order_price-infoForm.actual_price>0?'优惠金额：'+(infoForm.order_price-infoForm.actual_price).toFixed(2):'涨价金额：'+(infoForm.actual_price- infoForm.order_price).toFixed(2)}}</div>
                         </div>
                         <div class="memo-wrap">
                             <div class="content-title">卖家备注：</div>
@@ -133,7 +133,7 @@
                                 <label>快递单号：</label>
                                 <span>{{expressData.logistic_code}}</span>
                             </p>
-                            <p>
+                            <!-- <p>
                                 <label>快递轨迹：</label>
                             </p>
                             <div v-if="on_posting == 1" class="posting">正在查询，请稍候...</div>
@@ -143,7 +143,7 @@
                                     <div class="traces-time">{{item.time}}</div>
                                     <div class="traces-content">{{item.status}}</div>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </el-tab-pane>
                 </el-tabs>
@@ -326,11 +326,16 @@
                 if (pindex == 1) {
                     if (this.is_finish == 0) {
                         this.on_posting = 1;
-                        this.axios.post('order/getOrderExpress', {orderId: this.infoForm.id}).then((response) => {
+                        // 从物流服务获得物流信息
+                        // this.axios.post('order/getOrderExpress', {orderId: this.infoForm.id}).then((response) => {
+                        //     this.expressData = response.data.data;
+                        //     this.expressData.traces = JSON.parse(this.expressData.traces);
+                        //     this.is_finish = response.data.data.is_finish;
+                        //     this.on_posting = 0;
+                        // })
+                        // 从数据库加载物流信息
+                        this.axios.post('order/getexprefromdb', {orderId: this.infoForm.id}).then((response) => {
                             this.expressData = response.data.data;
-                            this.expressData.traces = JSON.parse(this.expressData.traces);
-                            this.is_finish = response.data.data.is_finish;
-                            this.on_posting = 0;
                         })
                     }
                 }

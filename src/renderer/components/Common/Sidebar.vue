@@ -61,6 +61,10 @@
 						<i class="fa fa-circle"></i>
 						<span>快递设置</span>
 					</el-menu-item>
+                    <el-menu-item index="/dashboard/orderdiscount">
+						<i class="fa fa-circle"></i>
+						<span>优惠设置</span>
+					</el-menu-item>
 					<el-menu-item index="/dashboard/admin">
 						<i class="fa fa-circle"></i>
 						<span>管理员</span>
